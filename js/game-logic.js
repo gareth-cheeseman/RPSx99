@@ -1,21 +1,18 @@
 // All code should be written in this file.
-let playerOneMoveOneType;
-let playerOneMoveOneValue;
-
-let playerOneMoveTwoType;
-let playerOneMoveTwoValue;
-
-let playerOneMoveThreeType;
-let playerOneMoveThreeValue;
-
-let playerTwoMoveOneType;
-let playerTwoMoveOneValue;
-
-let playerTwoMoveTwoType;
-let playerTwoMoveTwoValue;
-
-let playerTwoMoveThreeType;
-let playerTwoMoveThreeValue;
+let playerOneMoveOneType,
+  playerOneMoveOneValue,
+  playerOneMoveTwoType,
+  playerOneMoveTwoValue,
+  playerOneMoveThreeType,
+  playerOneMoveThreeValue,
+  playerTwoMoveOneType,
+  playerTwoMoveOneValue,
+  playerTwoMoveTwoType,
+  playerTwoMoveTwoValue,
+  playerTwoMoveThreeType,
+  playerTwoMoveThreeValue,
+  playerOneWins,
+  playerTwoWins;
 
 const setPlayerMoves = (
   player,
@@ -149,5 +146,51 @@ const getRoundWinner = roundNumber => {
     } else {
       return playerOne;
     }
+  }
+};
+
+const getGameWinner = () => {
+  if (
+    !playerOneMoveOneType ||
+    !playerOneMoveTwoType ||
+    !playerOneMoveThreeType ||
+    !playerOneMoveOneValue ||
+    !playerOneMoveTwoValue ||
+    !playerOneMoveThreeValue ||
+    !playerTwoMoveOneType ||
+    !playerTwoMoveTwoType ||
+    !playerTwoMoveThreeType ||
+    !playerTwoMoveOneValue ||
+    !playerTwoMoveTwoValue ||
+    !playerTwoMoveThreeValue
+  ) {
+    return null;
+  }
+
+  playerOneWins = 0;
+  playerTwoWins = 0;
+  const roundOneWinner = getRoundWinner(1);
+  const roundTwoWinner = getRoundWinner(2);
+  const roundThreeWinner = getRoundWinner(3);
+
+  addWin(roundOneWinner);
+  addWin(roundTwoWinner);
+  addWin(roundThreeWinner);
+
+  if (playerOneWins === playerTwoWins) {
+    return 'Tie';
+  } else if (playerOneWins > playerTwoWins) {
+    return 'Player One';
+  } else {
+    return 'Player Two';
+  }
+};
+
+const addWin = winner => {
+  if (winner === 'Player One') {
+    playerOneWins++;
+  }
+  if (winner === 'Player Two') {
+    playerTwoWins++;
   }
 };
