@@ -194,3 +194,33 @@ const addWin = winner => {
     playerTwoWins++;
   }
 };
+
+const setComputerMoves = () => {
+  const moveOneType = setMoveType();
+  const moveTwoType = setMoveType();
+  const moveThreeType = setMoveType();
+  const moveOneValue = Math.floor(Math.random() * 96) + 1;
+  const moveTwoValue = Math.floor(Math.random() * (97 - moveOneValue)) + 1;
+  const moveThreeValue = 99 - moveOneValue - moveTwoValue;
+
+  setPlayerMoves(
+    'Player Two',
+    moveOneType,
+    moveOneValue,
+    moveTwoType,
+    moveTwoValue,
+    moveThreeType,
+    moveThreeValue
+  );
+};
+
+const setMoveType = () => {
+  const randomNumber = Math.floor(Math.random() * 3);
+  if (randomNumber === 0) {
+    return 'rock';
+  } else if (randomNumber === 1) {
+    return 'paper';
+  } else {
+    return 'scissors';
+  }
+};
