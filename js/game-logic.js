@@ -23,25 +23,20 @@ const setPlayerMoves = (
   moveThreeType,
   moveThreeValue
 ) => {
-  const parameters = [
-    player,
-    moveOneType,
-    moveOneValue,
-    moveTwoType,
-    moveTwoValue,
-    moveThreeType,
-    moveThreeValue
-  ];
+  const values = [moveOneValue, moveTwoValue, moveThreeValue];
 
-  if (parameters.includes(undefined)) {
+  if (values.some(value => typeof value !== 'number')) {
     return;
   }
 
-  if (parameters.some(x => x < 1 || x > 99)) {
+  if (values.some(x => x < 1 || x > 99)) {
     return;
   }
 
-  if (moveOneValue + moveTwoValue + moveThreeValue > 99) {
+  if (
+    values.reduce((accumulator, currentValue) => accumulator + currentValue) >
+    99
+  ) {
     return;
   }
 
